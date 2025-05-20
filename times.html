@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>🏐 Times Cadastrados</h2>
+
+<form method="post" action="{{ url_for('adicionar_time') }}" class="mb-3">
+  <div class="input-group">
+    <input type="text" name="nome" class="form-control" placeholder="Nome do time" required>
+    <button class="btn btn-primary" type="submit">Adicionar</button>
+  </div>
+</form>
+
+<ul class="list-group">
+  {% for time in times %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      {{ time }}
+      <a href="{{ url_for('remover_time', indice=loop.index0) }}" class="btn btn-sm btn-danger">Remover</a>
+    </li>
+  {% else %}
+    <li class="list-group-item">Nenhum time cadastrado.</li>
+  {% endfor %}
+</ul>
+
+<a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">⬅ Voltar</a>
+{% endblock %}
