@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<a href="{{ url_for('adicionar') }}" class="btn btn-primary mb-3">➕ Adicionar Jogo</a>
+
+{% if jogos_por_local %}
+    {% for local, datas in jogos_por_local|dictsort %}
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white">
+                📍 {{ local }}
+            </div>
+            <div class="card-body">
+                {% for data, jogos in datas|dictsort %}
+                    <h5>📅 {{ data }}</h5>
+                    <ul class="list-group mb-3">
+                        {% for idx, jogo in jogos %}
+                        <li class="list-group-item">
+                            <strong>{{ jogo.horario }}</strong><br>
+                            {{ jogo.time1 }} vs {{ jogo.time2 }}<br>
+                            Árbitro: {{ jogo.arbitro }}<br>
+                            Valor: R$ {{ "%.2f"|format(jogo.valor) }}<br>
+                            Status:
+                            {% if jogo.pago %}
+                                <span class="text-success">✅ Pago</span>
+                            {% else %}
+                                <span class="text-danger">❌ Pendente</span>
+                            {% endif %}
+                            <br>
+                            <a href="{{ url_for('alternar_pagamento', indice=idx) }}" class="btn btn-sm btn-warning mt-2">Alterar Pagamento</a>
+                            <a href="{{ url_for('editar', indice=idx) }}" class="btn btn-sm btn-info mt-2">Editar</a>
+                            <a href="{{ url_for('remover', indice=idx) }}" class="btn btn-sm btn-danger mt-2">Remover</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Nenhum jogo agendado.</p>
+{% endif %}
+{% endblock %}
