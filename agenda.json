@@ -1,0 +1,22 @@
+[
+    {
+        "data": "20/05/2025",
+        "horario": "14:00",
+        "local": "Cancha 1",
+        "time1": "BMR",
+        "time2": "Time 2",
+        "arbitro": "asdasdad",
+        "valor": 200.0,
+        "pago": false
+    },
+    {
+        "data": "20/05/2025",
+        "horario": "15:00",
+        "local": "Cancha 1",
+        "time1": "Time 1",
+        "time2": "Time 2",
+        "arbitro": "asdasdad",
+        "valor": 154.0,
+        "pago": false
+    }
+]
